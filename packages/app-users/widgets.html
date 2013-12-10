@@ -1,0 +1,18 @@
+<template name="loginBar">
+	<div style="text-align: right; padding: 2em;">
+		{{loginButtons align="right"}}
+	</div>	
+</template>
+
+<template name="usersList">
+	<div style="padding: 2em;">
+		<h4>Users list</h4>
+		<ul>
+			{{#each list}}
+				<li>
+					{{this.username}}
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+</template>
