@@ -20,13 +20,14 @@ function formatDate(date) {
 var handleOnlineStatus = function (user) { 
   var userID = user.userId,
       session = user._session;
+
   session.socket.on("close", Meteor.bindEnvironment( function () {
     updateOnlineStatus(userID, false, formatDate(new Date()));
   }, function (e) {
     console.log(e)
   }));
 
-  updateOnlineStatus(userID, true, 'Right now');
+  updateOnlineStatus(userID, true);
 };
 
 
