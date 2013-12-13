@@ -6,6 +6,6 @@
 // -----------------------------------------------------------------------------
 Meteor.publish("userslist", function () {
   if(!this.userId) return null;
-  Meteor.call('handleOnlineStatus', this);
+  UserState.handleOnlineStatus(this);
 	return Meteor.users.find({});
 });

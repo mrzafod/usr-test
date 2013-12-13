@@ -1,3 +1,12 @@
 <template name="userState">
-  <span class="userState-status-line">Online: {{this.profile.online}}, Last visit at: {{this.profile.lastOnline}} </span>
+  <div class="userState-status-line">
+  {{#if this.profile.online}}
+    <span class="userState-status-online"> Online </span>
+  {{else}}
+    <span class="userState-status-offline"> Offline </span>
+  {{/if}}
+    {{#unless this.profile.online}}
+      , <span class="userState-status-lastVisit">Last visit at: {{this.profile.lastOnline}} </span>
+    {{/unless}}
+  </span>
 </template>

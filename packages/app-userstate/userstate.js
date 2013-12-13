@@ -1,3 +1,4 @@
+
 function updateOnlineStatus(id, online, timeStamp) {
   Meteor.users.update({_id: id }, {
     $set: {
@@ -11,16 +12,16 @@ function updateOnlineStatus(id, online, timeStamp) {
   });
 };
 
-function printDate(date) {
+function formatDate(date) {
   check(date, Date);
-  return date.getFullYear() + " " + date.getHours() + " " + date.getMinutes() + " " + date.getSeconds();
+  return date.toISOString();
 };
 
 var handleOnlineStatus = function (user) { 
   var userID = user.userId,
       session = user._session;
   session.socket.on("close", Meteor.bindEnvironment( function () {
-    updateOnlineStatus(userID, false, printDate(new Date()));
+    updateOnlineStatus(userID, false, formatDate(new Date()));
   }, function (e) {
     console.log(e)
   }));
@@ -28,6 +29,8 @@ var handleOnlineStatus = function (user) {
   updateOnlineStatus(userID, true, 'Right now');
 };
 
-Meteor.methods({
+
+//Module exports
+UserState = {
   handleOnlineStatus: handleOnlineStatus
-});
+};
